@@ -4,13 +4,51 @@ import datos_img from './datos_img.jpg';
 import './index.css';
 
 class Sensor extends React.Component {
+  constructor(){
+    super();
+    
+    this.state={
+      menuSensor: false,
+    }
+
+    this.menuSensor=this.menuSensor.bind(this);
+    this.cierraMenuSensor=this.cierraMenuSensor.bind(this);
+  }
+
+  menuSensor(event){
+    event.preventDefault();
+    this.setState({ menuSensor: true }, () => {
+      document.addEventListener('click', this.cierraMenuSensor);
+    });
+  }
+
+  cierraMenuSensor(){
+    this.setState({menuSensor: false}, () => {
+      document.removeEventListener('click', this.cierraMenuSensor);
+    });
+  }
+
   render() {
     return (
-      <button className="butSensor" onClick={() => alert('click')}>          
-        <h1>Sensor {this.props.nSensor}</h1>
-        <p><img src ={datos_img} className ="imgSensor" alt="datos_img"/></p>
-        <p>Temperatura actual = {this.props.nSensor}</p>
-      </button>
+      <div className="botones">
+        <button className="butSensor" onClick={this.menuSensor}>          
+          <h1>Sensor {this.props.nSensor}</h1>
+          <p><img src ={datos_img} className ="imgSensor" alt="datos_img"/></p>
+          <p>Temperatura actual = {this.props.nSensor}</p>
+        </button>
+        {
+          this.state.menuSensor 
+            ? (
+              <div className="menuSensor">
+                <button>ON/OFF</button>
+                <button>Unidades</button>
+              </div>
+            ) 
+            : (
+              null
+            )
+        }
+      </div>
     );
   }
 }
