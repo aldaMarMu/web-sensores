@@ -1,0 +1,90 @@
+body {
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+h1 {
+  background-color: #282c34;
+  color: white;
+  font-size: 30px;
+  font-weight: normal;
+  line-height: 40px;
+
+}
+
+h2 {
+  background-color: #282c34;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 50px;
+  text-align: center;
+}
+
+table{
+  width: 100%;
+  align-content: center;
+
+}
+
+td {
+  font-size: 20px;
+  line-height: 30px;
+  text-align: right;
+  padding: 15px;
+}
+
+.status {
+  text-align: left;
+  font-weight: bold;
+}
+
+
+.sensor-row:{
+  clear: both;
+  content: "";
+  display: table;
+  width: 100%;
+}
+
+.butSensor {
+  background: #fff;
+  border: 2px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 50px;
+  height: 400px;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 10px;
+  text-align: center;
+  width: 500px;
+}
+
+.imgSensor {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 3px;
+  padding: 0;
+  height: 20vmin;
+}
+
+.sensor:focus{
+  outline: none;
+}
+
+.kbd-navigation .sensor:focus {
+  background: #ddd;
+}
+
+.Monitor {
+  display: flex;
+  flex-direction: row;
+}
+
+
