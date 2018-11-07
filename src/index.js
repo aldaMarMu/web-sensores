@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import datos_img from './datos_img.jpg';
+import datos_img from './datos_img.jpg'
 import './index.css';
 
 class Sensor extends React.Component {
@@ -9,10 +9,14 @@ class Sensor extends React.Component {
     
     this.state={
       menuSensor: false,
+      activado: 'activado',
+      unidad: 'ºC',
     }
 
     this.menuSensor=this.menuSensor.bind(this);
     this.cierraMenuSensor=this.cierraMenuSensor.bind(this);
+    this.onOffSensor=this.onOffSensor.bind(this);
+    this.selUnidades=this.selUnidades.bind(this);
   }
 
   menuSensor(event){
@@ -22,26 +26,49 @@ class Sensor extends React.Component {
     });
   }
 
-  cierraMenuSensor(){
-    this.setState({menuSensor: false}, () => {
-      document.removeEventListener('click', this.cierraMenuSensor);
-    });
+  cierraMenuSensor(event){
+    if (!this.dropdownMenu.contains(event.target)) {
+      this.setState({menuSensor: false}, () => {
+        document.removeEventListener('click', this.cierraMenuSensor);
+      });
+    }
+  }
+
+  onOffSensor(){
+    if(this.state.activado == 'desactivado'){
+      this.setState({activado: 'activado'})
+    } else {
+      this.setState({activado: 'desactivado'})
+    }
+  }
+
+  selUnidades(){
+    if(this.state.unidad == 'ºC'){
+      this.setState({unidad: 'ºF'})
+    } else {
+      this.setState({unidad: 'ºC'})
+    }
   }
 
   render() {
     return (
       <div className="botones">
-        <button className="butSensor" onClick={this.menuSensor}>          
-          <h1>Sensor {this.props.nSensor}</h1>
+        <button className="butSensor" onClick={this.menuSensor}>  
+          <h1>Sensor {this.props.nSensor}: {this.state.activado}</h1>
           <p><img src ={datos_img} className ="imgSensor" alt="datos_img"/></p>
-          <p>Temperatura actual = {this.props.nSensor}</p>
+          <p>Temperatura actual = {this.props.nSensor} {this.state.unidad}</p>          
         </button>
         {
           this.state.menuSensor 
             ? (
-              <div className="menuSensor">
-                <button>ON/OFF</button>
-                <button>Unidades</button>
+              <div 
+                className="menuSensor"   
+                ref={(element) => {
+                  this.dropdownMenu = element;
+                }}
+              >
+                <button onClick={this.onOffSensor}>ON/OFF</button>
+                <button onClick={this.selUnidades}>Unidades</button>
               </div>
             ) 
             : (
